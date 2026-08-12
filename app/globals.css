@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-page: #f6f4ef;
+  --accent: #9e1b32;
+  --accent-dark: #6e1423;
+  --ink: #1b2430;
+  --muted: #6b7280;
+  --panel-border: #e2ded5;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--ink);
+  font-family: var(--font-sans), -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fokus keyboard yang selalu terlihat di atas panel putih maupun peta. */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@layer components {
+  .panel-card {
+    @apply rounded-xl border border-panel-border bg-panel shadow-panel;
+  }
+  .field-label {
+    @apply mb-1.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted;
+  }
+  .prose-id h2 {
+    @apply mb-2.5 mt-7 font-display text-[22px] font-bold text-ink;
+  }
+  .prose-id h2:first-child {
+    @apply mt-0;
+  }
+  .prose-id p {
+    @apply text-[14.5px] leading-[1.75] text-[#39424e];
+  }
+  .prose-id p + p {
+    @apply mt-3;
+  }
+  .prose-id b {
+    @apply font-semibold text-ink;
+  }
+}
+
+/* ---- Popup MapLibre: wadah untuk kartu rasionalisasi ---- */
+.maplibregl-popup-content {
+  border-radius: 12px;
+  padding: 13px 15px;
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 8px 26px rgba(20, 20, 20, 0.18);
+  font-family: var(--font-sans), sans-serif;
+}
+/* Kartu tujuh lapis bisa lebih tinggi dari peta di layar pendek — biarkan menggulir
+   di dalam popup, jangan meluber menutupi seluruh peta. */
+.kartu-popup .maplibregl-popup-content {
+  max-height: min(62vh, 470px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d8d3c8 transparent;
+}
+.maplibregl-popup-close-button {
+  font-size: 18px;
+  padding: 3px 8px;
+  color: var(--muted);
+  z-index: 2;
+}
+.maplibregl-popup-close-button:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* Scrollbar tipis untuk daftar prioritas. */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d8d3c8 transparent;
+}
+.thin-scroll::-webkit-scrollbar {
+  width: 7px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: #d8d3c8;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

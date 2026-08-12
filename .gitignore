@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+.env*.local
+
+# Dihasilkan otomatis oleh scripts/prepare-data.mjs
+/public/data/
+/lib/generated/
